@@ -70,11 +70,12 @@ class SortedArr :
             print("Sorted Array is Full")
             return
 
-        if self._size == 0 :
-            self._data[self._size] = value
-            self._size += 1
-            return
+        # if self._size == 0 :
+        #     self._data[self._size] = value
+        #     self._size += 1
+        #     return
 
+        i = self._size - 1
         for i in reversed(range(self._size)) :
             if value < self._data[i] :
                 self._data[i+1] = self._data[i]
@@ -130,6 +131,8 @@ def ArrMerge(array1, array2) :
 
 
 if __name__ == "__main__" :
+
+    '''
     array1 = Arr(20)
     array1.Append(1)
     array1.Append(2)
@@ -146,3 +149,14 @@ if __name__ == "__main__" :
 
     newarr = ArrMerge(array1, array2)
     newarr.print()
+
+    '''
+    test = SortedArr(10)
+
+    test.Append(2)
+    test.Append(6)
+    test.Append(4)
+    test.Append(3)
+    test.Append(10)
+    test.print()
+
