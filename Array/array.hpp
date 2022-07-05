@@ -9,6 +9,8 @@ class Arr {
 protected:
 
     std::unique_ptr<int[]> m_array;
+
+public:
     int m_capacity;
     int m_size;
 
@@ -57,7 +59,7 @@ public:
     }
 
 
-    int& operator[](int i) {
+    int& operator[](int i) const {
         return m_array[i];
     }
 
@@ -89,7 +91,10 @@ public:
     SortedArr() = default;
     ~SortedArr() = default;
 
-    SortedArr(int capacity):Arr(capacity) {}
+    SortedArr(int capacity):Arr(capacity) {
+
+        std::cout << "Constructor : " << capacity << std::endl;
+    }
 
     SortedArr(const SortedArr& other):Arr(other) {}
 
@@ -124,3 +129,43 @@ public:
 
     }
 };
+
+
+namespace array {
+    SortedArr Merge(const SortedArr& array1, const SortedArr& array2) {
+        SortedArr new_array{20};
+
+        int i{0}, j{0};
+        while (i < array1.m_size && j < array2.m_size) {
+            if (array1[i] < array2[j]) {
+                new_array.Append(array1[i]);
+                i++;
+                continue;
+            }
+            
+            if (array1[i] > array2[j]) {
+                new_array.Append(array2[j]);
+                j++;
+                continue;
+            }
+
+            new_array.Append(array1[i]);
+            new_array.Append(array2[j]);
+            i++;
+            j++;
+        }
+
+        if (i < array1.m_size) {
+            for (int m = i; m < array1.m_size; m++) {
+                new_array.Append(array1[m]);
+            }
+        }
+        else if (j < array2.m_size) {
+            for (int m = j; m < array2.m_size; m++) {
+                new_array.Append(array2[m]);
+            }
+        }
+
+        return new_array;
+    } 
+}
