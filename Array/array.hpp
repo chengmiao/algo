@@ -3,12 +3,12 @@
 #include <iostream>
 #include <memory>
 
-
+template <typename T>
 class Arr {
 
 protected:
 
-    std::unique_ptr<int[]> m_array;
+    std::unique_ptr<T[]> m_array;
 
 public:
     int m_capacity;
@@ -20,13 +20,13 @@ public:
     Arr() = default;
     ~Arr() = default;
 
-    Arr(int capacity):m_array(new int[capacity]), m_capacity(capacity), m_size(0) {}
+    Arr(int capacity):m_array(new T[capacity]), m_capacity(capacity), m_size(0) {}
 
     Arr(const Arr& other) {
 
         std::cout << "Copy constructor" << std::endl;
 
-        m_array = std::make_unique<int[]>(other.m_capacity);
+        m_array = std::make_unique<T[]>(other.m_capacity);
         m_capacity = other.m_capacity;
         m_size = other.m_size;
         for (int i = 0; i < other.m_size; ++i) {
@@ -59,15 +59,15 @@ public:
     }
 
 
-    int& operator[](int i) const {
+    T& operator[](int i) const {
         return m_array[i];
     }
 
-    void Append(int value) {
+    void Append(T value) {
         if (m_size == m_capacity) {
             std::cout << "Arr resized" << std::endl;
 
-            auto ptr = std::make_unique<int[]>(m_capacity * 2);
+            auto ptr = std::make_unique<T[]>(m_capacity * 2);
             for (int i = 0; i < m_size; ++i) {
                 ptr[i] = m_array[i];
             }
@@ -84,56 +84,57 @@ public:
     }
 };
 
-
-class SortedArr : public Arr {
+template <typename T>
+class SortedArr : public Arr<T> {
 
 public:
     SortedArr() = default;
     ~SortedArr() = default;
 
-    SortedArr(int capacity):Arr(capacity) {
+    SortedArr(int capacity):Arr<T>(capacity) {
 
         std::cout << "Constructor : " << capacity << std::endl;
     }
 
-    SortedArr(const SortedArr& other):Arr(other) {}
+    SortedArr(const SortedArr& other):Arr<T>(other) {}
 
-    SortedArr(SortedArr&& other) noexcept :Arr(std::move(other)) {
+    SortedArr(SortedArr&& other) noexcept :Arr<T>(std::move(other)) {
          std::cout << "SortedArr Move constructor" << std::endl;
     }
 
     SortedArr& operator=(SortedArr other) noexcept {
 
         std::cout << "SortedArr assignment" << std::endl;
-        Arr::operator=(std::move(other));
+        Arr<T>::operator=(std::move(other));
         return *this;
     }
 
-    void Append(int value) {
-        if (m_size == m_capacity)
+    void Append(T value) {
+        if (this->m_size == this->m_capacity)
             return;
 
 
-        int i = m_size - 1;
+        int i = this->m_size - 1;
         for (; i >= 0; i--) {
-            if (value < m_array[i]) {
-                m_array[i+1] = m_array[i];
+            if (value < this->m_array[i]) {
+                this->m_array[i+1] = this->m_array[i];
             }
             else {
                 break;
             }
         }
 
-        m_array[i + 1] = value;
-        ++m_size;
+        this->m_array[i + 1] = value;
+        ++this->m_size;
 
     }
 };
 
 
 namespace array {
-    SortedArr Merge(const SortedArr& array1, const SortedArr& array2) {
-        SortedArr new_array{20};
+    template <typename T>
+    SortedArr<T> Merge(const SortedArr<T>& array1, const SortedArr<T>& array2) {
+        SortedArr<T> new_array{20};
 
         int i{0}, j{0};
         while (i < array1.m_size && j < array2.m_size) {
