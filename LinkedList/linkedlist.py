@@ -99,11 +99,75 @@ class SingleLinkedList :
         return
 
 
+class CLinkedList :
+    def __init__(self) :
+        self.m_tail = None
+
+    def Insert(self, value) :
+        new_node = LinkedNode(value)
+        if self.m_tail == None :
+            self.m_tail = new_node
+            new_node.next = self.m_tail
+            return
+
+        new_node.next = self.m_tail.next
+        self.m_tail.next = new_node
+        self.m_tail = new_node
+
+    def FindByValue(self, value) :
+        p = self.m_tail
+        while p and p.data != value :
+            p = p.next
+            if p == self.m_tail :
+                break
+
+        return p
+
+    def DeleteByValue(self, value) :
+        if self.m_tail == None :
+            return False
+
+        if self.m_tail == self.m_tail.next :
+            if self.m_tail.data == value :
+                self.m_tail = None
+                return True
+            else :
+                return False
+
+        prev = self.m_tail
+        p = self.m_tail.next
+        while p != self.m_tail :
+            if p.data == value :
+                prev.next = p.next
+                return True
+
+            prev = p
+            p = p.next
+
+        return False
+
+    #def FindByIndex(self, index) :
+
+    #def DeleteByIndex(self, index) :
+
+    def Print(self) :
+        if self.m_tail == None :
+            return
+
+        p = self.m_tail
+        while p :
+            print(p.data)
+            p = p.next
+            if p == self.m_tail :
+                break
+
+        return
+
 
 
 if __name__ == "__main__" :
 
-    list = SingleLinkedList()
+    list = CLinkedList()
 
     list.Insert(2)
     list.Insert(51)
