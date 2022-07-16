@@ -91,10 +91,13 @@ class SingleLinkedList :
         if self.m_head == None :
             return
 
+        tmp = []
         p = self.m_head
         while p :
-            print(p.data)
+            tmp.append(p.data)
             p = p.next
+
+        print(tmp)
 
         return
 
@@ -162,7 +165,6 @@ class CLinkedList :
                 break
 
         return
-
 
 
 if __name__ == "__main__" :
