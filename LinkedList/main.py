@@ -1,6 +1,8 @@
 import Dlinkedlist
 import Linkedlist
 
+from typing import Optional
+
 
 def Reverse(list) :
     if list.m_head == None :
@@ -17,6 +19,14 @@ def Reverse(list) :
 
     list.m_head = new_head
     return
+
+def NewReverse(list) :
+    new_head = None
+    current = list.m_head
+    while current :
+        new_head, new_head.next, current = current, new_head, current.next
+
+    list.m_head = new_head
 
 
 def IsRing(list) :
@@ -35,6 +45,16 @@ def IsRing(list) :
             break
 
     return isring
+
+def IsRingNew(list) :
+    fast, slow = list.m_head, list.m_head
+    while fast and fast.next :
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast :
+            return True
+
+    return False
 
 
 def FindMiddle(list) :
@@ -59,8 +79,6 @@ def Merge(list1, list2) :
         p = list1.FindByIndex(0)
         q = list2.FindByIndex(0)
 
-        print(p.data)
-        print(q.data)
         if p.data < q.data :
             list1.DeleteByIndex(0)
             new_list.Insert(p.data)
@@ -83,6 +101,22 @@ def Merge(list1, list2) :
 
     return new_list
 
+def merge_sorted_list(l1: Linkedlist.LinkedNode, l2: Linkedlist.LinkedNode) -> Optional[Linkedlist.LinkedNode]:
+    if l1 and l2:
+        p1, p2 = l1, l2
+        fake_head = Linkedlist.LinkedNode(None)
+        current = fake_head
+        while p1 and p2:
+            if p1.data <= p2.data:
+                current._next = p1
+                p1 = p1._next
+            else:
+                current._next = p2
+                p2 = p2._next
+            current = current._next
+        current._next = p1 if p1 else p2
+        return fake_head._next
+    return l1 or l2
 
 
 list = Linkedlist.SingleLinkedList()
@@ -95,7 +129,8 @@ list.Insert(13)
 
 list.Print()
 
-Reverse(list)
+#Reverse(list)
+NewReverse(list)
 
 list.Print()
 
@@ -136,7 +171,9 @@ list = Linkedlist.SingleLinkedList()
 list.m_head = node
 
 #list.Print()
-print(IsRing(list))
+#print(IsRing(list))
+
+print(IsRingNew(list))
 
 
 
