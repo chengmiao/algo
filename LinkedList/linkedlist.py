@@ -75,7 +75,7 @@ class SingleLinkedList :
 
         prev = self.m_head
         p = self.m_head.next
-        pos = 0
+        pos = 1
         while p :
             if pos == index :
                 prev.next = p.next

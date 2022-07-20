@@ -6,15 +6,19 @@
 int main(int argc, char **argv) {
 
 
-    auto tmp = LinkedList();
+    auto list = LinkedList();
 
-    if (tmp.head == nullptr) {
-        std::cout << "init nullptr" << std::endl;
-    }
+    list.Insert(2);
+    list.Insert(51);
+    list.Insert(223);
+    list.Insert(98);
+    list.Insert(13);
 
-    auto test = std::make_shared<LinkedNode>(123);
+    list.Print();
 
-    std::cout << test->data << std::endl;
+    auto new_list = std::move(list);
+
+    new_list.Print();
 
 
     return 0;
