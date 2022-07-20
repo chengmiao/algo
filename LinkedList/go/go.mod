@@ -1,3 +1,3 @@
-module linkedlist
+module demo
 
 go 1.18
