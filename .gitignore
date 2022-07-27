@@ -2,4 +2,4 @@
 Array/test
 Array/go/demo
 *__pycache__*
-
+*.vscode*
