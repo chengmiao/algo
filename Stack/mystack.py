@@ -10,10 +10,17 @@ import linkedlist
 class Stack :
     def __init__(self, capacity = 20) :
         self.m_arr = myarray.Arr(capacity)
+        for i in range(capacity) :
+            self.m_arr.Append(None)
         self.m_top = 0
+        self.m_num = capacity
 
     def Push(self, value) :
-        self.m_arr.Append(value)
+        if self.m_top == self.m_num :
+            self.m_arr.Append(None)
+            self.m_num = self.m_arr._capacity
+
+        self.m_arr[self.m_top] = value
         self.m_top += 1
 
     def Pop(self) :
@@ -61,7 +68,12 @@ if __name__ == "__main__" :
 
     test.Print()
 
+    test.Push(4)
+    test.Push(5)
 
+    test.Print()
+
+    '''
     test1 = LinkedStack()
     test1.Push(1)
     test1.Push(2)
@@ -69,3 +81,4 @@ if __name__ == "__main__" :
     test1.Pop()
 
     test1.Print()
+    '''
