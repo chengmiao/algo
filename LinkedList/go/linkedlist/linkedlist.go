@@ -4,47 +4,47 @@ import (
 	"fmt"
 )
 
-type linkednode struct {
-	data int
-	next *linkednode
+type Linkednode struct {
+	Data int
+	Next *Linkednode
 }
 
-func (n *linkednode) SetData(value int) {
-	n.data = value
+func (n *Linkednode) SetData(value int) {
+	n.Data = value
 }
 
 type LinkedList struct {
-	head *linkednode
+	head *Linkednode
 }
 
 func (l *LinkedList) Insert(value int) bool {
-	new_node := &linkednode{data: value, next: nil}
-	new_node.next = l.head
+	new_node := &Linkednode{Data: value, Next: nil}
+	new_node.Next = l.head
 	l.head = new_node
 
 	return true
 }
 
-func (l *LinkedList) FindByValue(value int) *linkednode {
+func (l *LinkedList) FindByValue(value int) *Linkednode {
 	p := l.head
 	for {
-		if p == nil || p.data == value {
+		if p == nil || p.Data == value {
 			break
 		}
-		p = p.next
+		p = p.Next
 	}
 
 	return p
 }
 
-func (l *LinkedList) FindByIndex(index int) *linkednode {
+func (l *LinkedList) FindByIndex(index int) *Linkednode {
 	p := l.head
 	pos := 0
 	for {
 		if p == nil || pos == index {
 			break
 		}
-		p = p.next
+		p = p.Next
 		pos++
 	}
 
@@ -56,25 +56,25 @@ func (l *LinkedList) DeleteByValue(value int) bool {
 		return false
 	}
 
-	if l.head.data == value {
-		l.head = l.head.next
+	if l.head.Data == value {
+		l.head = l.head.Next
 		return true
 	}
 
 	prev := l.head
-	p := prev.next
+	p := prev.Next
 	for {
 		if p == nil {
 			break
 		}
 
-		if p.data == value {
-			prev.next = p.next
+		if p.Data == value {
+			prev.Next = p.Next
 			return true
 		}
 
 		prev = p
-		p = p.next
+		p = p.Next
 	}
 
 	return false
@@ -86,12 +86,12 @@ func (l *LinkedList) DeleteByIndex(index int) bool {
 	}
 
 	if index == 0 {
-		l.head = l.head.next
+		l.head = l.head.Next
 		return true
 	}
 
 	prev := l.head
-	p := prev.next
+	p := prev.Next
 	pos := 1
 	for {
 		if p == nil {
@@ -99,12 +99,12 @@ func (l *LinkedList) DeleteByIndex(index int) bool {
 		}
 
 		if pos == index {
-			prev.next = p.next
+			prev.Next = p.Next
 			return true
 		}
 
 		prev = p
-		p = p.next
+		p = p.Next
 		pos++
 	}
 
@@ -119,7 +119,7 @@ func (l *LinkedList) Print() {
 			break
 		}
 
-		fmt.Println(p.data)
-		p = p.next
+		fmt.Println(p.Data)
+		p = p.Next
 	}
 }

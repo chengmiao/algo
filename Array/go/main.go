@@ -1,10 +1,8 @@
 package main
 
 import (
-	"demo/array"
-	//"golang.org/x/exp/constraints"
+	"array"
 )
-
 
 func merge(a, b *array.SortedArray) *array.SortedArray {
 	new_size := a.GetSize() + b.GetSize()
@@ -43,7 +41,6 @@ func merge(a, b *array.SortedArray) *array.SortedArray {
 	return new_sorted
 }
 
-
 func main() {
 
 	arr1 := array.NewArr(2)
@@ -66,7 +63,6 @@ func main() {
 	sorted.Append(5.89)
 
 	sorted.Print()
-
 
 	sorted1 := array.NewSortedArr(20)
 

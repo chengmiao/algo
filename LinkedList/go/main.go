@@ -5,12 +5,12 @@ import (
 	//"os/signal"
 	//"os"
 	//"syscall"
-	"demo/linkedlist"
+	link "linkedlist"
 )
 
 func main() {
 
-	list := link.LinkedList{}
+	list := &link.LinkedList{}
 
 	list.Insert(2)
 	list.Insert(51)

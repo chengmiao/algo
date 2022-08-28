@@ -5,6 +5,7 @@ sys.path.append("../LinkedList")
 
 
 
+
 import myarray
 import linkedlist
 
@@ -129,7 +130,7 @@ class RingQueue :
 
 if __name__ == "__main__" :
 
-    q = RingQueue(6)
+    q = RingQueue(5)
     q.Enqueue(1)
     q.Enqueue(2)
     q.Enqueue(3)

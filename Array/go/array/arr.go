@@ -6,7 +6,6 @@ import (
 	//"golang.org/x/exp/constraints"
 )
 
-
 type Arr struct {
 	m_array    []interface{}
 	m_capacity int
@@ -67,4 +66,8 @@ func (arr *Arr) Print() {
 
 func (arr *Arr) GetSize() int {
 	return arr.m_size
+}
+
+func (arr *Arr) GetCapacity() int {
+	return arr.m_capacity
 }
